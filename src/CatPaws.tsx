@@ -29,7 +29,6 @@ const CatContainer = () => {
   const container = useRef<HTMLDivElement|null>(null);
   const [width, setWidth] = useState(container.current?.clientWidth);
   const [height, setHeight] = useState(container.current?.clientHeight);
-  const canvas = useRef<HTMLCanvasElement|null>(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,11 +37,10 @@ const CatContainer = () => {
     }
     container.current?.addEventListener("resize", handleResize);
   })
-
   
   return (
     <CanvasContainer ref={container}>
-      <CatCanvas ref={canvas} width={width} height={height}/>
+      <CatCanvas width={width} height={height}/>
       <RoundButton onClick={() => console.log("close")}>{TIMES_SIGN}</RoundButton>
     </CanvasContainer>
   )

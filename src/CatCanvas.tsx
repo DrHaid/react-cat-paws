@@ -1,12 +1,24 @@
-import React, { forwardRef, LegacyRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { CatCanvasProps } from "./types";
 
-type CatCanvasProps = {
-  height?: number;
-  width?: number;
-}
+export const CatCanvas = ({ height, width }: CatCanvasProps) => {
+  const canvasRef = useRef<HTMLCanvasElement|null>(null);
 
-export const CatCanvas = forwardRef(({ height, width }: CatCanvasProps, ref: LegacyRef<HTMLCanvasElement> | undefined) => {
+  const renderFrame = () => {
+    // ...
+  };
+
+  const tick = () => {
+    if (!canvasRef.current) return;
+    renderFrame();
+    requestAnimationFrame(tick);
+  };
+
+  useEffect(() => {
+    requestAnimationFrame(tick);
+  }, []);
+  
   return (
-    <canvas ref={ref} height={height} width={width} />
+    <canvas ref={canvasRef} height={height} width={width} />
   )
-});
+};
