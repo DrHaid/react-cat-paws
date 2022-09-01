@@ -1,6 +1,7 @@
 import { EasingType } from "./types";
+import { Vec2 } from "./Vec2";
 
-class Vec2Animation {
+export class Vec2Animation {
   from: Vec2;
   to: Vec2;
   progress: number;
