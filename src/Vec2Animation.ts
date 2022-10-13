@@ -15,7 +15,7 @@ export class Vec2Animation {
   }
  
   getNext(delta: number) {
-    if (this.progress + delta < 1) {
+    if (this.progress + delta > 1) {
       this.progress = 1;
       return this.to;
     }

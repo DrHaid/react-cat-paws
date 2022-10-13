@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CatCanvas } from "./CatCanvas";
 
 const RoundButton = styled.button`; 
@@ -30,16 +30,19 @@ const CatContainer = () => {
   const [width, setWidth] = useState(container.current?.clientWidth);
   const [height, setHeight] = useState(container.current?.clientHeight);
 
+  const handleResize = useCallback(() => {
+    if(!container.current) return;
+    setWidth(container.current.clientWidth);
+    setHeight(container.current.clientHeight);
+  }, []);
+
   useEffect(() => {
-    const handleResize = () => {
-      setWidth(container.current?.clientWidth);
-      setHeight(container.current?.clientHeight);
-    }
-    container.current?.addEventListener("resize", handleResize);
-  })
-  
+    window.addEventListener("resize", handleResize)
+    handleResize();
+  }, [container])
+
   return (
-    <CanvasContainer ref={container}>
+    <CanvasContainer ref={container} >
       <CatCanvas width={width} height={height}/>
       <RoundButton onClick={() => console.log("close")}>{TIMES_SIGN}</RoundButton>
     </CanvasContainer>
