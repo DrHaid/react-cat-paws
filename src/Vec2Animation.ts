@@ -13,7 +13,7 @@ export class Vec2Animation {
     this.progress = 0;
     this.easingType = easingType
   }
- 
+
   getNext(delta: number) {
     if (this.progress + delta > 1) {
       this.progress = 1;
@@ -25,7 +25,7 @@ export class Vec2Animation {
     return Vec2.lerp(this.from, this.to, easedProgress);
   }
 
-  static getEasedProgress(progress: number, easingType: EasingType): number{
+  static getEasedProgress(progress: number, easingType: EasingType): number {
     switch (easingType) {
       case EasingType.LINEAR:
         return progress;
