@@ -6,6 +6,7 @@ import { Vec2Animation } from "./Vec2Animation";
 
 export const CatCanvas = ({ height, width }: CatCanvasProps) => {
   const catPaws = useRef<CatPaw[]>([]);
+  const catPawPrints = useRef<Vec2[]>([]);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
 
@@ -15,11 +16,20 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
   const renderFrame = () => {
     clearCanvas();
 
+    catPawPrints.current.forEach((print) => {
+      if (!ctx.current || !canvasRef.current) return;
+      ctx.current.fillStyle = "#0008FF";
+      ctx.current.fillRect(print.x, print.y, 25, 25);
+    })
+
     catPaws.current.forEach((paw) => {
       if (!ctx.current || !canvasRef.current) return;
       paw.update(0.0035);
       ctx.current.fillStyle = "#FF0000";
       ctx.current.fillRect(paw.position.x, paw.position.y, 25, 25);
+      if(paw.placePawPrint()){
+        catPawPrints.current.push(paw.targetPosition)
+      }
     })
   };
 

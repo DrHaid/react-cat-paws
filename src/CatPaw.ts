@@ -2,13 +2,17 @@ import { EasingType } from "./types";
 import { Vec2 } from "./Vec2";
 import { Vec2Animation } from "./Vec2Animation";
 
+type PawPrintState = "none" | "pending" | "placed";
+
 export class CatPaw {
   animSequence: Vec2Animation[];
   targetPosition: Vec2;
   position: Vec2;
+  pawPrintState: PawPrintState;
 
   constructor(screenSize: Vec2, targetPos: Vec2){
     this.animSequence = [];
+    this.pawPrintState = "none";
     this.targetPosition = targetPos;
     
     const getRandomRange = (min: number, max: number) => {
@@ -50,9 +54,22 @@ export class CatPaw {
 
   update(delta: number){
     const activeAnimation = this.animSequence.find((a) => a.progress < 1);
-    if(!activeAnimation) return;
+    if(!activeAnimation) 
+      return;
+    if(this.pawPrintState === "none"){
+      if (this.animSequence.indexOf(activeAnimation) === 1){
+        this.pawPrintState = "pending";
+      }
+    }
     const nextPos = activeAnimation.getNext(delta);
     this.position = nextPos;
-    console.log(nextPos);
+  }
+
+  placePawPrint(){
+    if(this.pawPrintState === "pending"){
+      this.pawPrintState = "placed";
+      return true;
+    }
+    return false;
   }
 }
