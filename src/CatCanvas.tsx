@@ -15,7 +15,7 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
   const renderFrame = () => {
     clearCanvas();
 
-    if(!ctx.current) return;
+    if (!ctx.current) return;
     catPawRenderer.current.renderFrame(ctx.current, 0.0035);
   };
 
@@ -30,8 +30,8 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
     requestAnimationFrame(tick);
   }, []);
 
-  const addCatPaw = ({nativeEvent: {clientX, clientY}}: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
-    if(!width||!height) return;
+  const addCatPaw = ({ nativeEvent: { clientX, clientY } }: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    if (!width || !height) return;
     const screenSize = new Vec2(width, height);
     const targetPos = new Vec2(clientX, clientY);
     catPawRenderer.current.addCatPaw(new CatPaw(screenSize, targetPos));

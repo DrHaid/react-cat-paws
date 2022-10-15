@@ -26,12 +26,12 @@ const CanvasContainer = styled.div`
 const TIMES_SIGN = "×";
 
 const CatContainer = () => {
-  const container = useRef<HTMLDivElement|null>(null);
+  const container = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(container.current?.clientWidth);
   const [height, setHeight] = useState(container.current?.clientHeight);
 
   const handleResize = useCallback(() => {
-    if(!container.current) return;
+    if (!container.current) return;
     setWidth(container.current.clientWidth);
     setHeight(container.current.clientHeight);
   }, []);
@@ -43,12 +43,12 @@ const CatContainer = () => {
 
   return (
     <CanvasContainer ref={container} >
-      <CatCanvas width={width} height={height}/>
+      <CatCanvas width={width} height={height} />
       <RoundButton onClick={() => console.log("close")}>{TIMES_SIGN}</RoundButton>
     </CanvasContainer>
   )
 }
 
 export const CatPaws = () => {
-  return (<CatContainer/>);
+  return (<CatContainer />);
 }

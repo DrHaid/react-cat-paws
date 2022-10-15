@@ -10,15 +10,15 @@ export class CatPaw {
   position: Vec2;
   pawPrintState: PawPrintState;
 
-  constructor(screenSize: Vec2, targetPos: Vec2){
+  constructor(screenSize: Vec2, targetPos: Vec2) {
     this.animSequence = [];
     this.pawPrintState = "none";
     this.targetPosition = targetPos;
-    
+
     const getRandomRange = (min: number, max: number) => {
       return Math.random() * (max - min) + min;
     }
-    
+
     // find position on canvas border closest to target
     // TODO: simplify
     const centerX = screenSize.x / 2;
@@ -26,10 +26,10 @@ export class CatPaw {
     const borderDistX = (targetPos.x <= centerX) ? targetPos.x : screenSize.x - targetPos.x;
     const borderDistY = (targetPos.y <= centerY) ? targetPos.y : screenSize.y - targetPos.y;
     const borderPos = new Vec2(0, 0);
-    if(borderDistX < borderDistY){
+    if (borderDistX < borderDistY) {
       borderPos.y = targetPos.y + getRandomRange(-200, 200);
       borderPos.x = (targetPos.x <= centerX) ? 0 : screenSize.x;
-    }else{
+    } else {
       borderPos.x = targetPos.x + getRandomRange(-200, 200);
       borderPos.y = (targetPos.y <= centerY) ? 0 : screenSize.y;
     }
@@ -38,7 +38,7 @@ export class CatPaw {
     this.animSequence = this.getAnimations();
   }
 
-  getAnimations(){
+  getAnimations() {
     const moveTo = new Vec2Animation(
       this.position,
       this.targetPosition,
@@ -52,12 +52,12 @@ export class CatPaw {
     return [moveTo, moveBack]
   }
 
-  update(delta: number){
+  update(delta: number) {
     const activeAnimation = this.animSequence.find((a) => a.progress < 1);
-    if(!activeAnimation) 
+    if (!activeAnimation)
       return;
-    if(this.pawPrintState === "none"){
-      if (this.animSequence.indexOf(activeAnimation) === 1){
+    if (this.pawPrintState === "none") {
+      if (this.animSequence.indexOf(activeAnimation) === 1) {
         this.pawPrintState = "pending";
       }
     }
@@ -65,8 +65,8 @@ export class CatPaw {
     this.position = nextPos;
   }
 
-  placePawPrint(){
-    if(this.pawPrintState === "pending"){
+  placePawPrint() {
+    if (this.pawPrintState === "pending") {
       this.pawPrintState = "placed";
       return true;
     }
