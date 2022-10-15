@@ -1,27 +1,26 @@
-import React, { useEffect, useRef } from "react";
+import React, { MouseEventHandler, useEffect, useRef } from "react";
+import { CatPaw } from "./CatPaw";
 import { CatCanvasProps, EasingType } from "./types";
+import { Vec2 } from "./Vec2";
 import { Vec2Animation } from "./Vec2Animation";
 
 export const CatCanvas = ({ height, width }: CatCanvasProps) => {
+  const catPaws = useRef<CatPaw[]>([]);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
-
-  const testAnimation = useRef(
-    new Vec2Animation({ x: 0, y: 0 }, { x: 500, y: 500 }, EasingType.IN_OUT_SINE)
-  );
 
   const clearCanvas = () =>
     ctx.current?.clearRect(0, 0, canvasRef.current?.width ?? 0, canvasRef.current?.height ?? 0);
 
   const renderFrame = () => {
-    if (!ctx.current || !canvasRef.current) return;
-
     clearCanvas();
 
-    // draw test square with position animation
-    const pos = testAnimation.current.getNext(0.0005);
-    ctx.current.fillStyle = "#FF0000";
-    ctx.current.fillRect(pos.x, pos.x, 25, 25);
+    catPaws.current.forEach((paw) => {
+      if (!ctx.current || !canvasRef.current) return;
+      paw.update(0.0035);
+      ctx.current.fillStyle = "#FF0000";
+      ctx.current.fillRect(paw.position.x, paw.position.y, 25, 25);
+    })
   };
 
   const tick = () => {
@@ -35,7 +34,14 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
     requestAnimationFrame(tick);
   }, []);
 
+  const addCatPaw = ({nativeEvent: {clientX, clientY}}: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    if(!width||!height) return;
+    const screenSize = new Vec2(width, height);
+    const targetPos = new Vec2(clientX, clientY);
+    catPaws.current.push(new CatPaw(screenSize, targetPos));
+  }
+
   return (
-    <canvas ref={canvasRef} height={height} width={width} />
+    <canvas onClick={addCatPaw} ref={canvasRef} height={height} width={width} />
   )
 };

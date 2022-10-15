@@ -20,8 +20,12 @@ export class Vec2 {
   }
 
   static normalize(a: Vec2){
-    const mag = Math.sqrt(a.x * a.x + a.y * a.y);
+    const mag = Vec2.magnitude(a);
     return new Vec2(a.x / mag, a.y / mag);
+  }
+
+  static magnitude(a: Vec2){
+    return Math.sqrt(a.x * a.x + a.y * a.y);
   }
 
   static lerp(a: Vec2, b: Vec2, p: number){
