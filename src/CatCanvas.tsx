@@ -27,6 +27,7 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
 
   useEffect(() => {
     ctx.current = canvasRef.current?.getContext("2d") ?? null;
+    catPawRenderer.current.loadImages();
     requestAnimationFrame(tick);
   }, []);
 

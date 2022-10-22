@@ -8,6 +8,7 @@ export class CatPaw {
   animSequence: Vec2Animation[];
   targetPosition: Vec2;
   position: Vec2;
+  rotation: number;
   pawPrintState: PawPrintState;
 
   constructor(screenSize: Vec2, targetPos: Vec2) {
@@ -35,7 +36,16 @@ export class CatPaw {
     }
 
     this.position = borderPos;
+    this.rotation = this.getRotation();
     this.animSequence = this.getAnimations();
+  }
+
+  getRotation(){
+    const dir = Vec2.sub(this.targetPosition, this.position);
+    const norm = Vec2.normalize(dir);
+    var rad = Math.atan(norm.y/norm.x);
+    if ( dir.x < 0 ) rad += Math.PI;
+    return rad;
   }
 
   getAnimations() {
