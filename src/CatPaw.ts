@@ -22,6 +22,7 @@ export class CatPaw {
 
     // find position on canvas border closest to target
     // TODO: simplify
+    const borderMargin = 50;
     const centerX = screenSize.x / 2;
     const centerY = screenSize.y / 2;
     const borderDistX = (targetPos.x <= centerX) ? targetPos.x : screenSize.x - targetPos.x;
@@ -29,10 +30,10 @@ export class CatPaw {
     const borderPos = new Vec2(0, 0);
     if (borderDistX < borderDistY) {
       borderPos.y = targetPos.y + getRandomRange(-200, 200);
-      borderPos.x = (targetPos.x <= centerX) ? 0 : screenSize.x;
+      borderPos.x = (targetPos.x <= centerX) ? -borderMargin : screenSize.x + borderMargin;
     } else {
       borderPos.x = targetPos.x + getRandomRange(-200, 200);
-      borderPos.y = (targetPos.y <= centerY) ? 0 : screenSize.y;
+      borderPos.y = (targetPos.y <= centerY) ? -borderMargin : screenSize.y + borderMargin;
     }
 
     this.position = borderPos;
@@ -65,7 +66,7 @@ export class CatPaw {
   update(delta: number) {
     const activeAnimation = this.animSequence.find((a) => a.progress < 1);
     if (!activeAnimation)
-      return;
+      return false;
     if (this.pawPrintState === "none") {
       if (this.animSequence.indexOf(activeAnimation) === 1) {
         this.pawPrintState = "pending";
@@ -73,6 +74,7 @@ export class CatPaw {
     }
     const nextPos = activeAnimation.getNext(delta);
     this.position = nextPos;
+    return true;
   }
 
   placePawPrint() {
