@@ -1,27 +1,26 @@
-import styled from "@emotion/styled";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CatCanvas } from "./CatCanvas";
 
-const RoundButton = styled.button`; 
-  border: none;
-  border-radius: 50%;
-  background-color: #545454;
-  color: white;
-  font-size: 30px;
-  width: 50px;
-  height: 50px;
-  margin-left: -25px;
-  padding-bottom: 5px;
-  z-index: 2;
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-`
+const RoundButtonStyles: React.CSSProperties = {
+  border: "none",
+  borderRadius: "50%",
+  backgroundColor: "#545454",
+  color: "white",
+  fontSize: "30px",
+  width: "50px",
+  height: "50px",
+  marginLeft: "-25px",
+  paddingBottom: "5px",
+  zIndex: 2,
+  position: "absolute",
+  bottom: "10px",
+  left: "50%",
+}
 
-const CanvasContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+const CanvasContainerStyles: React.CSSProperties = {
+  width: "100%",
+  height: "100%",
+};
 
 const TIMES_SIGN = "×";
 
@@ -42,10 +41,10 @@ const CatContainer = () => {
   }, [container])
 
   return (
-    <CanvasContainer ref={container} >
+    <div style={CanvasContainerStyles} ref={container} >
       <CatCanvas width={width} height={height} />
-      <RoundButton onClick={() => console.log("close")}>{TIMES_SIGN}</RoundButton>
-    </CanvasContainer>
+      <button style={RoundButtonStyles} onClick={() => console.log("close")}>{TIMES_SIGN}</button>
+    </div>
   )
 }
 
