@@ -11,7 +11,7 @@ export class Vec2Animation {
     this.from = from;
     this.to = to;
     this.progress = 0;
-    this.easingType = easingType
+    this.easingType = easingType;
   }
 
   getNext(delta: number) {
@@ -21,7 +21,10 @@ export class Vec2Animation {
     }
 
     this.progress += delta;
-    const easedProgress = Vec2Animation.getEasedProgress(this.progress, this.easingType);
+    const easedProgress = Vec2Animation.getEasedProgress(
+      this.progress,
+      this.easingType
+    );
     return Vec2.lerp(this.from, this.to, easedProgress);
   }
 

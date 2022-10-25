@@ -15,7 +15,7 @@ const RoundButtonStyles: React.CSSProperties = {
   position: "absolute",
   bottom: "10px",
   left: "50%",
-}
+};
 
 const CanvasContainerStyles: React.CSSProperties = {
   width: "100%",
@@ -36,18 +36,20 @@ const CatContainer = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
     handleResize();
-  }, [container])
+  }, [container]);
 
   return (
-    <div style={CanvasContainerStyles} ref={container} >
+    <div style={CanvasContainerStyles} ref={container}>
       <CatCanvas width={width} height={height} />
-      <button style={RoundButtonStyles} onClick={() => console.log("close")}>{TIMES_SIGN}</button>
+      <button style={RoundButtonStyles} onClick={() => console.log("close")}>
+        {TIMES_SIGN}
+      </button>
     </div>
-  )
-}
+  );
+};
 
 export const CatPaws = () => {
-  return (<CatContainer />);
-}
+  return <CatContainer />;
+};

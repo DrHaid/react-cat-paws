@@ -10,7 +10,12 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
 
   const clearCanvas = () =>
-    ctx.current?.clearRect(0, 0, canvasRef.current?.width ?? 0, canvasRef.current?.height ?? 0);
+    ctx.current?.clearRect(
+      0,
+      0,
+      canvasRef.current?.width ?? 0,
+      canvasRef.current?.height ?? 0
+    );
 
   const renderFrame = () => {
     clearCanvas();
@@ -31,14 +36,16 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
     requestAnimationFrame(tick);
   }, []);
 
-  const addCatPaw = ({ nativeEvent: { clientX, clientY } }: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  const addCatPaw = ({
+    nativeEvent: { clientX, clientY },
+  }: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
     if (!width || !height) return;
     const screenSize = new Vec2(width, height);
     const targetPos = new Vec2(clientX, clientY);
     catPawRenderer.current.addCatPaw(new CatPaw(screenSize, targetPos));
-  }
+  };
 
   return (
     <canvas onClick={addCatPaw} ref={canvasRef} height={height} width={width} />
-  )
+  );
 };

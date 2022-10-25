@@ -18,22 +18,26 @@ export class CatPaw {
 
     const getRandomRange = (min: number, max: number) => {
       return Math.random() * (max - min) + min;
-    }
+    };
 
     // find position on canvas border closest to target
     // TODO: simplify
     const borderMargin = 50;
     const centerX = screenSize.x / 2;
     const centerY = screenSize.y / 2;
-    const borderDistX = (targetPos.x <= centerX) ? targetPos.x : screenSize.x - targetPos.x;
-    const borderDistY = (targetPos.y <= centerY) ? targetPos.y : screenSize.y - targetPos.y;
+    const borderDistX =
+      targetPos.x <= centerX ? targetPos.x : screenSize.x - targetPos.x;
+    const borderDistY =
+      targetPos.y <= centerY ? targetPos.y : screenSize.y - targetPos.y;
     const borderPos = new Vec2(0, 0);
     if (borderDistX < borderDistY) {
       borderPos.y = targetPos.y + getRandomRange(-200, 200);
-      borderPos.x = (targetPos.x <= centerX) ? -borderMargin : screenSize.x + borderMargin;
+      borderPos.x =
+        targetPos.x <= centerX ? -borderMargin : screenSize.x + borderMargin;
     } else {
       borderPos.x = targetPos.x + getRandomRange(-200, 200);
-      borderPos.y = (targetPos.y <= centerY) ? -borderMargin : screenSize.y + borderMargin;
+      borderPos.y =
+        targetPos.y <= centerY ? -borderMargin : screenSize.y + borderMargin;
     }
 
     this.position = borderPos;
@@ -41,11 +45,11 @@ export class CatPaw {
     this.animSequence = this.getAnimations();
   }
 
-  getRotation(){
+  getRotation() {
     const dir = Vec2.sub(this.targetPosition, this.position);
     const norm = Vec2.normalize(dir);
-    var rad = Math.atan(norm.y/norm.x);
-    if ( dir.x < 0 ) rad += Math.PI;
+    let rad = Math.atan(norm.y / norm.x);
+    if (dir.x < 0) rad += Math.PI;
     return rad;
   }
 
@@ -54,19 +58,18 @@ export class CatPaw {
       this.position,
       this.targetPosition,
       EasingType.IN_OUT_SINE
-    )
+    );
     const moveBack = new Vec2Animation(
       this.targetPosition,
       this.position,
       EasingType.IN_OUT_SINE
-    )
-    return [moveTo, moveBack]
+    );
+    return [moveTo, moveBack];
   }
 
   update(delta: number) {
     const activeAnimation = this.animSequence.find((a) => a.progress < 1);
-    if (!activeAnimation)
-      return false;
+    if (!activeAnimation) return false;
     if (this.pawPrintState === "none") {
       if (this.animSequence.indexOf(activeAnimation) === 1) {
         this.pawPrintState = "pending";

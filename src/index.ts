@@ -1,3 +1,3 @@
 import { CatPaws } from "./CatPaws";
 
-export { CatPaws }
+export { CatPaws };
