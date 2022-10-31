@@ -24,7 +24,7 @@ const CanvasContainerStyles: React.CSSProperties = {
 
 const TIMES_SIGN = "×";
 
-const CatContainer = () => {
+const CatPaws = () => {
   const container = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(container.current?.clientWidth);
   const [height, setHeight] = useState(container.current?.clientHeight);
@@ -50,6 +50,4 @@ const CatContainer = () => {
   );
 };
 
-export const CatPaws = () => {
-  return <CatContainer />;
-};
+export default CatPaws;

@@ -1,6 +1,6 @@
 {
-  "name": "react-cat-paws",
-  "version": "1.0.0",
+  "name": "@drhaid/react-cat-paws",
+  "version": "0.0.1",
   "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",
@@ -34,5 +34,11 @@
   },
   "peerDependencies": {
     "react": ">=17.0.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/drhaid"
   }
 }

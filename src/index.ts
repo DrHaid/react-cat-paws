@@ -1,3 +1,1 @@
-import { CatPaws } from "./CatPaws";
-
-export { CatPaws };
+export { default as CatPaws } from "./CatPaws";
