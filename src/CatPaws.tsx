@@ -25,7 +25,7 @@ const CanvasContainerStyles: React.CSSProperties = {
 
 const TIMES_SIGN = "×";
 
-const CatPaws = ({onClose, fillScreen}: CatPawsProps) => {
+const CatPaws = ({ onClose, fillScreen }: CatPawsProps) => {
   const container = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(container.current?.clientWidth);
   const [height, setHeight] = useState(container.current?.clientHeight);
@@ -53,10 +53,11 @@ const CatPaws = ({onClose, fillScreen}: CatPawsProps) => {
   return (
     <div style={style} ref={container}>
       <CatCanvas width={width} height={height} />
-      {onClose &&
+      {onClose && (
         <button style={RoundButtonStyles} onClick={onClose}>
           {TIMES_SIGN}
-        </button>}
+        </button>
+      )}
     </div>
   );
 };

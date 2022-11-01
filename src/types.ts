@@ -6,7 +6,7 @@ export type CatCanvasProps = {
 export type CatPawsProps = {
   onClose?: () => void;
   fillScreen?: boolean;
-}
+};
 
 export enum EasingType {
   LINEAR,

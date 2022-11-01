@@ -1,4 +1,4 @@
-import { CATPAW_PATHS, getRandomInt, PAWPRINT_PATHS } from "./images";
+import { CATPAW_PATHS, getRandomInt } from "./images";
 import { EasingType } from "./types";
 import { Vec2 } from "./Vec2";
 import { Vec2Animation } from "./Vec2Animation";
