@@ -58,11 +58,11 @@ export class CatPawRenderer {
       }
       this.drawImage(
         ctx,
-        this.catPawImageCache[0],
+        this.catPawImageCache[paw.imageIndex],
         paw.position,
         paw.rotation,
-        2,
-        new Vec2(235, 32)
+        0.7,
+        new Vec2(1230, 120)
       );
       if (paw.placePawPrint()) {
         this.pawPrints.push(new PawPrint(paw.targetPosition, paw.rotation));
@@ -81,11 +81,11 @@ export class CatPawRenderer {
     this.pawPrints.forEach((print) => {
       this.drawImage(
         ctx,
-        this.pawPrintImageCache[0],
+        this.pawPrintImageCache[print.imageIndex],
         print.position,
         print.rotation,
-        2,
-        new Vec2(32, 32)
+        0.7,
+        new Vec2(150, 120)
       );
     });
   }

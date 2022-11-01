@@ -12,3 +12,7 @@ export const PAWPRINT_PATHS = [
   new URL("img/pawprint3.png", import.meta.url),
   new URL("img/pawprint4.png", import.meta.url)
 ];
+
+export const getRandomInt = (max: number) => {
+  return Math.floor(Math.random() * max);
+}

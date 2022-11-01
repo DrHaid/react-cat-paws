@@ -21,7 +21,7 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
     clearCanvas();
 
     if (!ctx.current) return;
-    catPawRenderer.current.renderFrame(ctx.current, 0.0035);
+    catPawRenderer.current.renderFrame(ctx.current, 0.004);
   };
 
   const tick = () => {

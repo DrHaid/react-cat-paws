@@ -1,3 +1,4 @@
+import { CATPAW_PATHS, getRandomInt, PAWPRINT_PATHS } from "./images";
 import { EasingType } from "./types";
 import { Vec2 } from "./Vec2";
 import { Vec2Animation } from "./Vec2Animation";
@@ -9,6 +10,7 @@ export class CatPaw {
   targetPosition: Vec2;
   position: Vec2;
   rotation: number;
+  imageIndex: number;
   pawPrintState: PawPrintState;
 
   constructor(screenSize: Vec2, targetPos: Vec2) {
@@ -22,7 +24,7 @@ export class CatPaw {
 
     // find position on canvas border closest to target
     // TODO: simplify
-    const borderMargin = 50;
+    const borderMargin = 80;
     const centerX = screenSize.x / 2;
     const centerY = screenSize.y / 2;
     const borderDistX =
@@ -43,6 +45,11 @@ export class CatPaw {
     this.position = borderPos;
     this.rotation = this.getRotation();
     this.animSequence = this.getAnimations();
+    this.imageIndex = this.getImage();
+  }
+
+  getImage() {
+    return getRandomInt(CATPAW_PATHS.length - 1);
   }
 
   getRotation() {
