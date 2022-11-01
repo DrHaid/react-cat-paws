@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { CatCanvas } from "./CatCanvas";
+import { CatPawsProps } from "./types";
 
 const RoundButtonStyles: React.CSSProperties = {
   border: "none",
@@ -24,7 +25,7 @@ const CanvasContainerStyles: React.CSSProperties = {
 
 const TIMES_SIGN = "×";
 
-const CatPaws = () => {
+const CatPaws = ({onClose, fillScreen}: CatPawsProps) => {
   const container = useRef<HTMLDivElement | null>(null);
   const [width, setWidth] = useState(container.current?.clientWidth);
   const [height, setHeight] = useState(container.current?.clientHeight);
@@ -40,12 +41,22 @@ const CatPaws = () => {
     handleResize();
   }, [container]);
 
+  let style = CanvasContainerStyles;
+  if (fillScreen)
+    style = {
+      ...style,
+      position: "fixed",
+      left: 0,
+      top: 0,
+    };
+
   return (
-    <div style={CanvasContainerStyles} ref={container}>
+    <div style={style} ref={container}>
       <CatCanvas width={width} height={height} />
-      <button style={RoundButtonStyles} onClick={() => console.log("close")}>
-        {TIMES_SIGN}
-      </button>
+      {onClose &&
+        <button style={RoundButtonStyles} onClick={onClose}>
+          {TIMES_SIGN}
+        </button>}
     </div>
   );
 };

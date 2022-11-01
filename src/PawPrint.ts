@@ -13,6 +13,6 @@ export class PawPrint {
   }
 
   getImage() {
-    return getRandomInt(PAWPRINT_PATHS.length - 1);
+    return getRandomInt(PAWPRINT_PATHS.length);
   }
 }

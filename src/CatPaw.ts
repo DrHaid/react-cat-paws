@@ -49,7 +49,7 @@ export class CatPaw {
   }
 
   getImage() {
-    return getRandomInt(CATPAW_PATHS.length - 1);
+    return getRandomInt(CATPAW_PATHS.length);
   }
 
   getRotation() {

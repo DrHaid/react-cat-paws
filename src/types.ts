@@ -3,6 +3,11 @@ export type CatCanvasProps = {
   width?: number;
 };
 
+export type CatPawsProps = {
+  onClose?: () => void;
+  fillScreen?: boolean;
+}
+
 export enum EasingType {
   LINEAR,
   IN_OUT_SINE,
