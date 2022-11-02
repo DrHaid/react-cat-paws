@@ -8,6 +8,7 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
   const catPawRenderer = useRef<CatPawRenderer>(new CatPawRenderer());
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ctx = useRef<CanvasRenderingContext2D | null>(null);
+  const lastTime = useRef<number| null>(null);
 
   const clearCanvas = () =>
     ctx.current?.clearRect(
@@ -17,16 +18,18 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
       canvasRef.current?.height ?? 0
     );
 
-  const renderFrame = () => {
+  const renderFrame = (delta: number) => {
     clearCanvas();
 
     if (!ctx.current) return;
-    catPawRenderer.current.renderFrame(ctx.current, 0.004);
+    catPawRenderer.current.renderFrame(ctx.current, delta);
   };
-
-  const tick = () => {
+  
+  const tick = (time: number) => {
     if (!canvasRef.current) return;
-    renderFrame();
+    const delta = time - (lastTime.current ?? time);
+    lastTime.current = time;
+    renderFrame(delta * 0.0012);
     requestAnimationFrame(tick);
   };
 
