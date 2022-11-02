@@ -2,7 +2,7 @@
   "name": "react-cat-paws",
   "homepage": "https://github.com/DrHaid/react-cat-paws",
   "license": "MIT",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "source": "src/index.ts",
   "main": "dist/main.js",
   "module": "dist/module.js",

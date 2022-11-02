@@ -2,12 +2,12 @@
 
 A React component library for adding a cat paw overlay to your web app.
 
-![preview](preview.gif)
+![preview](https://raw.githubusercontent.com/DrHaid/react-cat-paws/main/preview.gif)
 
 ## Install & Use
 
 ```
-npm install @drhaid/react-cat-paws
+npm install react-cat-paws
 ```
 
 Include the `<CatPaws/>` component in your application.
