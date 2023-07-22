@@ -62,12 +62,12 @@ export class CatPaw {
     const moveTo = new Vec2Animation(
       this.position,
       this.targetPosition,
-      EasingType.IN_OUT_SINE
+      EasingType.IN_OUT_SINE,
     );
     const moveBack = new Vec2Animation(
       this.targetPosition,
       this.position,
-      EasingType.IN_OUT_SINE
+      EasingType.IN_OUT_SINE,
     );
     return [moveTo, moveBack];
   }

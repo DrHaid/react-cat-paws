@@ -21,13 +21,13 @@ export class CatPawRenderer {
       fetch(path)
         .then((resp) => resp.blob())
         .then((blb) => createImageBitmap(blb))
-        .then((btm) => this.catPawImageCache.push(btm))
+        .then((btm) => this.catPawImageCache.push(btm)),
     );
     PAWPRINT_PATHS.forEach((path) =>
       fetch(path)
         .then((resp) => resp.blob())
         .then((blb) => createImageBitmap(blb))
-        .then((btm) => this.pawPrintImageCache.push(btm))
+        .then((btm) => this.pawPrintImageCache.push(btm)),
     );
   }
 
@@ -37,7 +37,7 @@ export class CatPawRenderer {
     pos: Vec2,
     rotation: number,
     scale = 1,
-    pivot: Vec2 = new Vec2(0, 0)
+    pivot: Vec2 = new Vec2(0, 0),
   ) {
     ctx.setTransform(scale, 0, 0, scale, pos.x, pos.y);
     ctx.rotate(rotation);
@@ -62,7 +62,7 @@ export class CatPawRenderer {
         paw.position,
         paw.rotation,
         0.7,
-        new Vec2(1230, 120)
+        new Vec2(1230, 120),
       );
       if (paw.placePawPrint()) {
         this.pawPrints.push(new PawPrint(paw.targetPosition, paw.rotation));
@@ -85,7 +85,7 @@ export class CatPawRenderer {
         print.position,
         print.rotation,
         0.7,
-        new Vec2(150, 120)
+        new Vec2(150, 120),
       );
     });
   }

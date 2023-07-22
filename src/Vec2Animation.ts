@@ -23,7 +23,7 @@ export class Vec2Animation {
     this.progress += delta;
     const easedProgress = Vec2Animation.getEasedProgress(
       this.progress,
-      this.easingType
+      this.easingType,
     );
     return Vec2.lerp(this.from, this.to, easedProgress);
   }
