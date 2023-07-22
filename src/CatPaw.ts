@@ -23,21 +23,19 @@ export class CatPaw {
     };
 
     // find position on canvas border closest to target
-    // TODO: simplify
     const borderMargin = 80;
+    const offsetRange = 200;
     const centerX = screenSize.x / 2;
     const centerY = screenSize.y / 2;
-    const borderDistX =
-      targetPos.x <= centerX ? targetPos.x : screenSize.x - targetPos.x;
-    const borderDistY =
-      targetPos.y <= centerY ? targetPos.y : screenSize.y - targetPos.y;
+    const borderDistX = Math.min(targetPos.x, screenSize.x - targetPos.x);
+    const borderDistY = Math.min(targetPos.y, screenSize.y - targetPos.y);
     const borderPos = new Vec2(0, 0);
     if (borderDistX < borderDistY) {
-      borderPos.y = targetPos.y + getRandomRange(-200, 200);
+      borderPos.y = targetPos.y + getRandomRange(-offsetRange, offsetRange);
       borderPos.x =
         targetPos.x <= centerX ? -borderMargin : screenSize.x + borderMargin;
     } else {
-      borderPos.x = targetPos.x + getRandomRange(-200, 200);
+      borderPos.x = targetPos.x + getRandomRange(-offsetRange, offsetRange);
       borderPos.y =
         targetPos.y <= centerY ? -borderMargin : screenSize.y + borderMargin;
     }

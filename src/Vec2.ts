@@ -29,7 +29,6 @@ export class Vec2 {
   }
 
   static lerp(a: Vec2, b: Vec2, p: number) {
-    // TODO: test this!
     const dir = Vec2.sub(b, a);
     const prog = Vec2.scalarMult(dir, p);
     return Vec2.add(a, prog);
