@@ -38,6 +38,19 @@ const App = () => {
 }
 ```
 
+## ⚠️ Troubleshooting
+- When using this package with [Vite](https://vitejs.dev/) a side effect of the automatic caching might cause the images not to load.  
+To work around that exclude _react-cat-paws_ from the dependency optimization in the `vite.config.ts`.
+``` typescript
+export default defineConfig({
+  ...
+  optimizeDeps: {
+    exclude: [ "react-cat-paws" ]
+  },
+  ...
+})
+```
+
 ---
 This project is inspired by the cat Easter egg by Google: https://g.co/kgs/wk2hPY  
 However, while heavily inspired, all images were painted by me to match Google's style.
