@@ -1,4 +1,3 @@
-import { getRandomInt, PAWPRINT_PATHS } from "./images";
 import { Vec2 } from "./Vec2";
 
 export class PawPrint {
@@ -6,13 +5,9 @@ export class PawPrint {
   rotation: number;
   imageIndex: number;
 
-  constructor(position: Vec2, rotation: number) {
+  constructor(position: Vec2, rotation: number, imgIndex: number) {
     this.position = position;
     this.rotation = rotation;
-    this.imageIndex = this.getImage();
-  }
-
-  getImage() {
-    return getRandomInt(PAWPRINT_PATHS.length);
+    this.imageIndex = imgIndex;
   }
 }

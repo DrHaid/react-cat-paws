@@ -48,7 +48,11 @@ export const CatCanvas = ({ height, width }: CatCanvasProps) => {
     const rect = (target as HTMLElement).getBoundingClientRect();
     const offset = new Vec2(rect.left, rect.top);
     const relativePos = Vec2.sub(targetPos, offset);
-    catPawRenderer.current.addCatPaw(new CatPaw(screenSize, relativePos));
+    const imgIndex = catPawRenderer.current.getCatPawImage();
+    if (imgIndex === -1) return;
+    catPawRenderer.current.addCatPaw(
+      new CatPaw(screenSize, relativePos, imgIndex),
+    );
   };
 
   return (

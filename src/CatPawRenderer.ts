@@ -1,22 +1,26 @@
 import { CatPaw } from "./CatPaw";
-import { CATPAW_PATHS, PAWPRINT_PATHS } from "./images";
+import { CATPAW_PATHS, getRandomInt, PAWPRINT_PATHS } from "./images";
 import { PawPrint } from "./PawPrint";
 import { Vec2 } from "./Vec2";
 
 export class CatPawRenderer {
   catPaws: CatPaw[];
   pawPrints: PawPrint[];
+  loadingStarted: boolean;
   catPawImageCache: ImageBitmap[];
   pawPrintImageCache: ImageBitmap[];
 
   constructor() {
     this.catPaws = [];
     this.pawPrints = [];
+    this.loadingStarted = false;
     this.catPawImageCache = [];
     this.pawPrintImageCache = [];
   }
 
   loadImages() {
+    if (this.loadingStarted) return;
+    this.loadingStarted = true;
     CATPAW_PATHS.forEach((path) =>
       fetch(path)
         .then((resp) => resp.blob())
@@ -50,6 +54,18 @@ export class CatPawRenderer {
     this.drawCatPaws(ctx, frameTime);
   }
 
+  getCatPawImage() {
+    return this.catPawImageCache.length !== 0
+      ? getRandomInt(this.catPawImageCache.length)
+      : -1;
+  }
+
+  getPawPrintImage() {
+    return this.pawPrintImageCache.length !== 0
+      ? getRandomInt(this.pawPrintImageCache.length)
+      : -1;
+  }
+
   drawCatPaws(ctx: CanvasRenderingContext2D, delta: number) {
     const cleanup: CatPaw[] = [];
     this.catPaws.forEach((paw) => {
@@ -65,7 +81,12 @@ export class CatPawRenderer {
         new Vec2(1230, 120),
       );
       if (paw.placePawPrint()) {
-        this.pawPrints.push(new PawPrint(paw.targetPosition, paw.rotation));
+        const imgIndex = this.getPawPrintImage();
+        if (imgIndex !== -1) {
+          this.pawPrints.push(
+            new PawPrint(paw.targetPosition, paw.rotation, imgIndex),
+          );
+        }
       }
     });
     // remove cat paws with finished animations

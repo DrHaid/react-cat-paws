@@ -1,4 +1,3 @@
-import { CATPAW_PATHS, getRandomInt } from "./images";
 import { EasingType } from "./types";
 import { Vec2 } from "./Vec2";
 import { Vec2Animation } from "./Vec2Animation";
@@ -13,10 +12,11 @@ export class CatPaw {
   imageIndex: number;
   pawPrintState: PawPrintState;
 
-  constructor(screenSize: Vec2, targetPos: Vec2) {
+  constructor(screenSize: Vec2, targetPos: Vec2, imgIndex: number) {
     this.animSequence = [];
     this.pawPrintState = "none";
     this.targetPosition = targetPos;
+    this.imageIndex = imgIndex;
 
     const getRandomRange = (min: number, max: number) => {
       return Math.random() * (max - min) + min;
@@ -43,11 +43,6 @@ export class CatPaw {
     this.position = borderPos;
     this.rotation = this.getRotation();
     this.animSequence = this.getAnimations();
-    this.imageIndex = this.getImage();
-  }
-
-  getImage() {
-    return getRandomInt(CATPAW_PATHS.length);
   }
 
   getRotation() {
