@@ -5,12 +5,12 @@
     "parcel-resolver-tspaths"
   ],
   "transformers": {
-    "*.{ts,tsx}": [
+    "/src/*.{ts,tsx}": [
       "@parcel/transformer-typescript-tsc"
     ]
   },
   "validators": {
-    "*.{ts,tsx}": [
+    "/src/*.{ts,tsx}": [
       "@parcel/validator-typescript"
     ]
   }
