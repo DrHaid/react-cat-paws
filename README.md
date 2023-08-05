@@ -1,5 +1,7 @@
 # React - CatPaws
 
+### 🐈 [Demo](https://drhaid.github.io/react-cat-paws/)
+
 A React component library for adding a cat paw overlay to your web app.
 
 ![preview](https://raw.githubusercontent.com/DrHaid/react-cat-paws/main/preview.gif)
